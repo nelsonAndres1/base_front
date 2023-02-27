@@ -1,0 +1,106 @@
+<meta charset="utf-8">
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center mb-3">Vincular Horarios</h2>
+            <hr class="mb-4">
+            <div class="row justify-content-center">
+                <form #registerForm="ngForm" (ngSubmit)="registerVincularHorarios(registerForm)">
+                    <div class="col-md-12 offset-md">
+                        <span class="anchor" id="formComplex"></span>
+                        <div class="card card-outline-secondary">
+                            <div class="card-header">
+                                <h3 class="mb-0">Ingrese la información requerida</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mt-12">
+                                    <div class="col-sm-3 pb-3">
+                                        <label for="exampleAccount"><b>Buscar Dependencia</b></label>
+                                        <input type="text" class="form-control" id="exampleAccount"
+                                            placeholder="Buscar Dependencia..." name="vacio" [(ngModel)]="vacio"
+                                            (input)="getConta28($event)" required>
+                                        <div class="col-sm-12">
+                                            <div class="card card-body mb-1" *ngFor="let result of data"
+                                                (click)="getDependencia(result)" style="cursor: pointer;">
+                                                <h4>Dependencia: {{result.detalle}}</h4>
+                                                <small>
+                                                    <h4>Codigo {{result.coddep}}</h4>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 pb-3">
+                                        <label for="exampleAccount"><b>Trabajadores</b></label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault"
+                                                (click)="Cambio()">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Seleccionar Todos!
+                                            </label>
+                                        </div>
+                                        <div class="form-check" *ngFor="let result of trabajadores">
+                                            <input class="form-check-input" checked={{bandera}} type="checkbox"
+                                                (change)="agregar(result.docemp)" value={{result.docemp}}
+                                                id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{result.docemp}} {{result.nomemp}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 pb-3">
+                                        <label for="exampleAccount"><b>Horarios</b></label>
+                                        <select class="form-control" name="estado" (change)="detalleHorario($event)"
+                                            required>
+                                            <option value="" selected>SELECCIONE</option>
+                                            <option *ngFor="let dt of horarios" value={{dt.id}}>
+                                                {{dt.detalle}}
+                                                -
+                                                {{dt.tipo_detalle}}
+                                                -
+                                                {{dt.horingam}}
+                                                -
+                                                {{dt.horsalam}}
+                                                -
+                                                {{dt.horingpm}}
+                                                -
+                                                {{dt.horsalpm}}
+                                            </option>
+                                        </select>
+                                        <br>
+                                        <label for="">Detalle Horario</label>
+                                        <div class="col-md-12 offset-md">
+                                            <div class="col-sm-3 pb-3">
+                                                <h4>
+                                                    <b> Hora Ingreso AM</b> {{horariosSeleccionado.horingam}}
+                                                </h4>
+                                                <h4>
+                                                    <b> Hora Salida AM</b> {{horariosSeleccionado.horsalam}}
+                                                </h4>
+                                            </div>
+                                            
+                                            <div class="col-sm-3 pb-3">
+                                                <h4>
+                                                    <b> Hora Ingreso PM</b> {{horariosSeleccionado.horingpm}}
+                                                </h4>
+                                                <h4>
+                                                    <b> Hora Salida PM</b> {{horariosSeleccionado.horsalpm}}
+                                                </h4>                                                
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row mt-4">
+                                    <button type="submit" [disabled]="registerForm.invalid"
+                                        class="btn btn-success">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<!-- <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="./assets/logo.png" alt="">
+    </a>
+    <div class="text">
+        <h3>Caja de Compensación Familiar de Nariño</h3>
+        <h5>Inventario de Activos</h5>
+    </div>
+</nav> -->
+<meta charset="utf-8">
+
+<nav class="navbar navbar-light bg-light" *ngIf="identity != null">
+
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" routerLink="home" style="cursor: pointer;">
+                <img src="./assets/logo.png">
+                <b>Control de Ingreso</b>
+            </a>
+            <!-- <a class="navbar-brand" routerLink=""><b></b></a> -->
+            <a class="navbar-brand" routerLink="home"><button type="button" class="btn btn-outline-info"><i class="icon-home"></i>Registro</button></a>
+            <a class="navbar-brand" routerLink="horarios"><button type="button" class="btn btn-outline-info"><i class="icon-home"></i>Horarios</button></a>
+            <a class="navbar-brand" routerLink="vincular_horarios"><button type="button" class="btn btn-outline-info"><i class="icon-home"></i>Vincular Horarios</button></a>
+            <a>
+                <div class="card">
+                    <div class="card-body">
+                       <b>Usuario:</b>  {{identity.name}}
+                    </div>
+                </div>
+            </a>
+        </div>
+        <button class="btn btn-danger navbar-btn" (click)="salir()">Salir</button>
+    </div>
+</nav>
+<br>
+
+
+<router-outlet></router-outlet>
+
+
+<footer class="site-footer" *ngIf="identity != null">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h6>About</h6>
+                <p class="text-justify">Oficina de Sistemas e Informatica</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">Copyright &copy; 2023
+                    <a href="https://comfamiliarnarino.com/">Comfamiliar de Nariño</a>.
+                </p>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                    <li><img src="./assets/logo.png"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

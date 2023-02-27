@@ -1,0 +1,108 @@
+<meta charset="utf-8">
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center mb-3">Horarios</h2>
+            <hr class="mb-4">
+            <div class="row justify-content-center">
+                <form #registerForm="ngForm" (ngSubmit)="registerHorarios(registerForm)">
+                    <div class="col-md-10 offset-md-1">
+                        <span class="anchor" id="formComplex"></span>
+                        <div class="card card-outline-secondary">
+                            <div class="card-header">
+                                <h3 class="mb-0">Ingrese la información requerida</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mt-12">
+                                    <div class="col-sm-6 pb-3">
+                                        <label for="exampleAccount"><b>Horario Ingreso Mañana</b></label>
+                                        <input type="time" class="form-control" id="exampleAccount"
+                                            placeholder="Horario Ingreso Mañana" name="horingam" #horingam="ngModel"
+                                            [(ngModel)]="horario.horingam" id="documento" required>
+                                        <small *ngIf="!horingam.valid && horingam.touched"
+                                            class="invalid-feedback d-block">
+                                            El campo no es valido!
+                                        </small>
+                                    </div>
+                                    <div class="col-sm-6 pb-3">
+                                        <label for="exampleAccount"><b>Horario Salida Mañana</b></label>
+                                        <input class="form-control" id="exampleAccount"
+                                            placeholder="Horario Salida Mañana" name="horsalam" #horsalam="ngModel"
+                                            [(ngModel)]="horario.horsalam" type="time" id="documento">
+                                        <small *ngIf="!horsalam.valid && horsalam.touched"
+                                            class="invalid-feedback d-block">
+                                            El campo no es valido!
+                                        </small>
+                                    </div>
+                                    <div class="col-sm-6 pb-3">
+                                        <label for="exampleAccount"><b>Horario Ingreso Tarde</b></label>
+                                        <input class="form-control" id="exampleAccount"
+                                            placeholder="Horario Ingreso Tarde" name="horingpm" #horingpm="ngModel"
+                                            [(ngModel)]="horario.horingpm" type="time" id="documento">
+
+                                        <small *ngIf="!horingpm.valid && horingpm.touched"
+                                            class="invalid-feedback d-block">
+                                            El campo no es valido!
+                                        </small>
+                                    </div>
+                                    <div class="col-sm-6 pb-3">
+                                        <label for="exampleAccount"><b>Horario Salida Tarde</b></label>
+                                        <input class="form-control" id="exampleAccount"
+                                            placeholder="Horario Ingreso Tarde" name="horsalpm" #horsalpm="ngModel"
+                                            [(ngModel)]="horario.horsalpm" type="time" id="documento" required>
+                                        <small *ngIf="!horsalpm.valid && horsalpm.touched"
+                                            class="invalid-feedback d-block">
+                                            El campo no es valido!
+                                        </small>
+                                    </div>
+
+                                    <div class="col-sm-6 pb-3">
+                                        <label for="exampleAccount"><b>Estado</b></label>
+                                        <select class="form-control" name="estado" #estado="ngModel"
+                                            [(ngModel)]="horario.estado" required>
+                                            <option value="" selected>SELECCIONE</option>
+                                            <option value="A">ACTIVO</option>
+                                            <option value="I">INACTIVO</option>
+                                        </select>
+                                        <small *ngIf="!estado.valid && estado.touched" class="invalid-feedback d-block">
+                                            El campo no es valido!
+                                        </small>
+                                    </div>
+                                    <div class="col-sm-6 pb-3">
+                                        <label for="exampleAccount"><b>Detalle</b></label>
+                                        <input class="form-control" id="exampleAccount" placeholder="Detalle"
+                                            name="detalle" #detalle="ngModel" [(ngModel)]="horario.detalle" type="text"
+                                            id="documento" required>
+                                        <small *ngIf="!detalle.valid && detalle.touched"
+                                            class="invalid-feedback d-block">
+                                            El campo no es valido!
+                                        </small>
+                                    </div>
+                                    <div class="col-sm-6 pb-3">
+                                        <label for="exampleAccount"><b>Tipo Horario</b></label>
+                                        <select class="form-control" name="id_tipo" #id_tipo="ngModel"
+                                            [(ngModel)]="horario.id_tipo" required>
+                                            <option value="" selected>SELECCIONE</option>
+                                            <option *ngFor="let dt of tipo_horario" value={{dt.id}}>{{dt.detalle}}
+                                            </option>
+                                        </select>
+                                        <small *ngIf="!id_tipo.valid && id_tipo.touched"
+                                            class="invalid-feedback d-block">
+                                            El campo no es valido!
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row mt-4">
+                                    <button type="submit" [disabled]="registerForm.invalid"
+                                        class="btn btn-success">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
