@@ -45,10 +45,7 @@ export class AppComponent implements OnInit,
         this.bandera_asignartrabajador_horario = false;
         console.log("Datos!!");
         console.log(this.identity);
-
-       
-
-        
+        this.permisos_();
     }
 
     cerrarSesion(){
