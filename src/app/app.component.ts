@@ -60,32 +60,7 @@ export class AppComponent implements OnInit,
          });
     }
 
-    permisos_(){
-        this._registerService.permisos(this.identity).subscribe(
-            response => {
-                if(response.resource=='registroController'){
-                    if(response.action == 'registro'){
-                        this.bandera_registro = true;
-                    }
-                }
-                if(response.resource=='tipo_horarioController'){
-                    if(response.action == 'asignar'){
-                        this.bandera_asignartipo_horario = true;
-                    }
-                }
-                if(response.resource=='trabajador_horarioController'){
-                    if(response.action == 'asignar'){
-                        this.bandera_asignartrabajador_horario = true;
-                    }
-                }
-                console.log(this.bandera_registro);
-                console.log(this.bandera_asignartipo_horario);
-                console.log(this.bandera_asignartrabajador_horario);
-            }
-
-        )
-    }
-
+  
 
     ngOnInit(): void {
         console.log("Web cargada correctamente");
@@ -142,7 +117,6 @@ export class AppComponent implements OnInit,
         if (this.permisos != null) {
             this.arrayPermisos = this.permisos.split(',');
         }
-        this.permisos_();
     }
 
     permisosPago() {
