@@ -7,12 +7,13 @@ import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { identity } from 'rxjs';
+import { RegisterService } from './services/register.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [Gener02Service]
+    providers: [Gener02Service, RegisterService]
 })
 
 export class AppComponent implements OnInit,
@@ -33,12 +34,19 @@ export class AppComponent implements OnInit,
     arrayPermisos: any = [];
     
 
-    constructor(private route: ActivatedRoute, public _gener02Service: Gener02Service, private router: Router) {
+    constructor(private _registerService: RegisterService,private route: ActivatedRoute, public _gener02Service: Gener02Service, private router: Router) {
         this.identity = this._gener02Service.getIdentity();
         this.token = this._gener02Service.getToken();
 
         console.log("Datos!!");
         console.log(this.identity);
+
+        this._registerService.permisos(this.identity).subscribe(
+            response => {
+                console.log("respuesta!!!!!!!");
+                console.log(response);
+            }
+        )
 
         
     }
