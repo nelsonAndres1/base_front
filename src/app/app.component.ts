@@ -32,12 +32,17 @@ export class AppComponent implements OnInit,
     public permisos: any;
     itemDetail: any = [];
     arrayPermisos: any = [];
+    bandera_registro: boolean;
+    bandera_asignartipo_horario: boolean;
+    bandera_asignartrabajador_horario: boolean;
     
 
     constructor(private _registerService: RegisterService,private route: ActivatedRoute, public _gener02Service: Gener02Service, private router: Router) {
         this.identity = this._gener02Service.getIdentity();
         this.token = this._gener02Service.getToken();
-
+        this.bandera_registro = false;
+        this.bandera_asignartipo_horario = false;
+        this.bandera_asignartrabajador_horario = false;
         console.log("Datos!!");
         console.log(this.identity);
 
@@ -59,14 +64,32 @@ export class AppComponent implements OnInit,
          });
     }
 
-    ngOnInit(): void {
-        console.log("Web cargada correctamente");
+    permisos_(){
         this._registerService.permisos(this.identity).subscribe(
             response => {
-                console.log("respuesta!!!!!!!");
-                console.log(response);
+                if(response.resource=='registroController'){
+                    if(response.action == 'registro'){
+                        this.bandera_registro = true;
+                    }
+                }
+                if(response.resource=='tipo_horarioController'){
+                    if(response.action == 'asignar'){
+                        this.bandera_asignartipo_horario = true;
+                    }
+                }
+                if(response.resource=='trabajador_horarioController'){
+                    if(response.action == 'asignar'){
+                        this.bandera_asignartrabajador_horario = true;
+                    }
+                }
             }
         )
+    }
+
+
+    ngOnInit(): void {
+        console.log("Web cargada correctamente");
+    
     }
 
     inp() {

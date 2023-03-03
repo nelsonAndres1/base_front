@@ -18,9 +18,9 @@
                 <b>Control de Ingreso</b>
             </a>
             <!-- <a class="navbar-brand" routerLink=""><b></b></a> -->
-            <a class="navbar-brand" routerLink="home"><button type="button" class="btn btn-outline-info"><i class="icon-home"></i>Registro</button></a>
-            <a class="navbar-brand" routerLink="horarios"><button type="button" class="btn btn-outline-info"><i class="icon-home"></i>Horarios</button></a>
-            <a class="navbar-brand" routerLink="vincular_horarios"><button type="button" class="btn btn-outline-info"><i class="icon-home"></i>Vincular Horarios</button></a>
+            <a class="navbar-brand" routerLink="home" *ngIf="bandera_registro"><button type="button" class="btn btn-outline-info"><i class="icon-home"></i>Registro</button></a>
+            <a class="navbar-brand" routerLink="horarios" *ngIf="bandera_asignartipo_horario"><button type="button" class="btn btn-outline-info"><i class="icon-home"></i>Horarios</button></a>
+            <a class="navbar-brand" routerLink="vincular_horarios"*ngIf="bandera_asignartrabajador_horario"><button type="button" class="btn btn-outline-info"><i class="icon-home"></i>Vincular Horarios</button></a>
             <a>
                 <div class="card">
                     <div class="card-body">
