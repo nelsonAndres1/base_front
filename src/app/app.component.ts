@@ -78,7 +78,11 @@ export class AppComponent implements OnInit,
                         this.bandera_asignartrabajador_horario = true;
                     }
                 }
+                console.log(this.bandera_registro);
+                console.log(this.bandera_asignartipo_horario);
+                console.log(this.bandera_asignartrabajador_horario);
             }
+
         )
     }
 
