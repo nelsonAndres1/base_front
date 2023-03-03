@@ -41,12 +41,7 @@ export class AppComponent implements OnInit,
         console.log("Datos!!");
         console.log(this.identity);
 
-        this._registerService.permisos(this.identity).subscribe(
-            response => {
-                console.log("respuesta!!!!!!!");
-                console.log(response);
-            }
-        )
+       
 
         
     }
@@ -66,6 +61,12 @@ export class AppComponent implements OnInit,
 
     ngOnInit(): void {
         console.log("Web cargada correctamente");
+        this._registerService.permisos(this.identity).subscribe(
+            response => {
+                console.log("respuesta!!!!!!!");
+                console.log(response);
+            }
+        )
     }
 
     inp() {
