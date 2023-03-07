@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
     this.usuario = this.identity.sub;
     this.nomin02 = new Nomin02('', '', '', '', '', '', '', this.usuario);
 
+
     this.traerUltimo();
   }
   ngAfterContentInit(): void {
@@ -105,5 +106,9 @@ export class HomeComponent implements OnInit, AfterContentInit {
       }
     )
   }
+
+
+  
+
 
 }

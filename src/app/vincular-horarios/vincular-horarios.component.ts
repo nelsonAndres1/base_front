@@ -26,6 +26,7 @@ export class VincularHorariosComponent implements OnInit {
   public horariosSeleccionado: any = [];
   public trabajador_horario: Trabajador_Horario;
   public id_horario;
+  public dias:any = [];
   constructor(private _conta28Service: Conta28Service, private _nomin02Service: Nomin02Service, private _horariosService: HorariosService, private _trabajador_horarioService: Trabajador_HorarioService) {
     this.nomin02 = new Nomin02('', '', '', '', '', '', '',0);
 
@@ -36,15 +37,34 @@ export class VincularHorariosComponent implements OnInit {
         this.horarios = response;
       }
     )
+/*     this.dias = [{'1':'LUNES','2':'MARTES', '3':'MIERCOLES', '4':'JUEVES', '5':'VIERNES', '6':'SABADO', '7':'DOMINGO'}]; */
   }
 
   ngOnInit(): void {
   }
 
+  agregarDias(dia){
+    let bandera = false;
+    if(this.dias.length>0){
+      for (let index = 0; index < this.dias.length; index++) {
+        if(this.dias[index]== dia){
+          this.dias.splice(index, 1);
+          bandera = true;
+        }
+      }
+      if(!bandera){
+        this.dias.push(dia);
+      }
+    }else{
+      this.dias.push(dia);
+    }
+    console.log("diasss!");
+    console.log(this.dias);
+
+  }
+
   registerVincularHorarios(form) {
-
-
-    this.trabajador_horario = new Trabajador_Horario(this.id_horario,this.seleccionados);
+    this.trabajador_horario = new Trabajador_Horario(this.id_horario,this.seleccionados,this.dias);
     console.log("arregloeeeeee");
     console.log(this.trabajador_horario);
     this._trabajador_horarioService.guardarTrabajadorHorario(this.trabajador_horario).subscribe(
@@ -112,10 +132,9 @@ export class VincularHorariosComponent implements OnInit {
     this.trabajadores = [];
     this.coddep = result.coddep;
     this.nomin02.coddep = this.coddep;
+    this.vacio = result.detalle;
     this._nomin02Service.getNomin02(this.nomin02).subscribe(
       response => {
-
-        console.log(response);
         if (response) {
           this.trabajadores = response;
         } else {

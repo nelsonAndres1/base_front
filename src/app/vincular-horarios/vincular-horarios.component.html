@@ -47,7 +47,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 pb-3">
+                                    <div class="col-sm-3 pb-3">
                                         <label for="exampleAccount"><b>Horarios</b></label>
                                         <select class="form-control" name="estado" (change)="detalleHorario($event)"
                                             required>
@@ -66,10 +66,14 @@
                                                 {{dt.horsalpm}}
                                             </option>
                                         </select>
+                                        
                                         <br>
+                                        
                                         <label for="">Detalle Horario</label>
                                         <div class="col-md-12 offset-md">
-                                            <div class="col-sm-3 pb-3">
+                                        
+                                            <div class="col-sm-6 pb-3">
+
                                                 <h4>
                                                     <b> Hora Ingreso AM</b> {{horariosSeleccionado.horingam}}
                                                 </h4>
@@ -78,7 +82,7 @@
                                                 </h4>
                                             </div>
                                             
-                                            <div class="col-sm-3 pb-3">
+                                            <div class="col-sm-6 pb-3">
                                                 <h4>
                                                     <b> Hora Ingreso PM</b> {{horariosSeleccionado.horingpm}}
                                                 </h4>
@@ -87,6 +91,51 @@
                                                 </h4>                                                
                                             </div>
 
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 pb-3">
+                                        <label for=""><b>Vincular Dia</b></label>
+                                        <div class="form-check" >
+                                            <input class="form-check-input" (change)="agregarDias(1)" type="checkbox" id="flexCheckDefault" value=1>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                LUNES
+                                            </label>
+                                        </div>
+                                        <div class="form-check" >
+                                            <input class="form-check-input" (change)="agregarDias(2)" type="checkbox" id="flexCheckDefault" value=2>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                               MARTES
+                                            </label>
+                                        </div>
+                                        <div class="form-check" >
+                                            <input class="form-check-input" (change)="agregarDias(3)" type="checkbox" id="flexCheckDefault" value=3>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                MIERCOLES
+                                            </label>
+                                        </div>
+                                        <div class="form-check" >
+                                            <input class="form-check-input" (change)="agregarDias(4)" type="checkbox" id="flexCheckDefault" value=4>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                JUEVES
+                                            </label>
+                                        </div>
+                                        <div class="form-check" >
+                                            <input class="form-check-input" (change)="agregarDias(5)"  type="checkbox" id="flexCheckDefault" value=5>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                VIERNES
+                                            </label>
+                                        </div>
+                                        <div class="form-check" >
+                                            <input class="form-check-input" (change)="agregarDias(6)"  type="checkbox" id="flexCheckDefault" value=6>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                SABADO
+                                            </label>
+                                        </div>
+                                        <div class="form-check" >
+                                            <input class="form-check-input" (change)="agregarDias(7)"  type="checkbox" id="flexCheckDefault" value=7>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                DOMINGO
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
