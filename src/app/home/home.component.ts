@@ -88,9 +88,9 @@ export class HomeComponent implements OnInit, AfterContentInit {
         }
       );
     }
- /*      setTimeout(() => {
+      setTimeout(() => {
       window.location.reload();
-    }, 5000);  */
+    }, 5000); 
 
   }
 
