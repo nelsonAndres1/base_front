@@ -79,6 +79,9 @@ export class VincularHorariosComponent implements OnInit {
             response => {
               if (response) {
                 Swal.fire('Correcto!', 'Datos Registrados Correctamente', 'success');
+                setTimeout(() => {
+                  window.location.reload();
+                }, 1000);
               } else {
                 Swal.fire('Incorrecto!', 'Datos No Registrados!', 'error');
               }
