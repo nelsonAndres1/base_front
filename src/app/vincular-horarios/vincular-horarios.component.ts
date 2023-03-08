@@ -26,9 +26,9 @@ export class VincularHorariosComponent implements OnInit {
   public horariosSeleccionado: any = [];
   public trabajador_horario: Trabajador_Horario;
   public id_horario;
-  public dias:any = [];
+  public dias: any = [];
   constructor(private _conta28Service: Conta28Service, private _nomin02Service: Nomin02Service, private _horariosService: HorariosService, private _trabajador_horarioService: Trabajador_HorarioService) {
-    this.nomin02 = new Nomin02('', '', '', '', '', '', '',0);
+    this.nomin02 = new Nomin02('', '', '', '', '', '', '', 0);
 
     this.trabajador_horario = new Trabajador_Horario('', []);
 
@@ -37,25 +37,25 @@ export class VincularHorariosComponent implements OnInit {
         this.horarios = response;
       }
     )
-/*     this.dias = [{'1':'LUNES','2':'MARTES', '3':'MIERCOLES', '4':'JUEVES', '5':'VIERNES', '6':'SABADO', '7':'DOMINGO'}]; */
+    /*     this.dias = [{'1':'LUNES','2':'MARTES', '3':'MIERCOLES', '4':'JUEVES', '5':'VIERNES', '6':'SABADO', '7':'DOMINGO'}]; */
   }
 
   ngOnInit(): void {
   }
 
-  agregarDias(dia){
+  agregarDias(dia) {
     let bandera = false;
-    if(this.dias.length>0){
+    if (this.dias.length > 0) {
       for (let index = 0; index < this.dias.length; index++) {
-        if(this.dias[index]== dia){
+        if (this.dias[index] == dia) {
           this.dias.splice(index, 1);
           bandera = true;
         }
       }
-      if(!bandera){
+      if (!bandera) {
         this.dias.push(dia);
       }
-    }else{
+    } else {
       this.dias.push(dia);
     }
     console.log("diasss!");
@@ -64,18 +64,29 @@ export class VincularHorariosComponent implements OnInit {
   }
 
   registerVincularHorarios(form) {
-    this.trabajador_horario = new Trabajador_Horario(this.id_horario,this.seleccionados,this.dias);
-    console.log("arregloeeeeee");
-    console.log(this.trabajador_horario);
-    this._trabajador_horarioService.guardarTrabajadorHorario(this.trabajador_horario).subscribe(
-      response =>{
-        if(response){
-          Swal.fire('Correcto!','Datos Registrados Correctamente','success');
-        }else{
-          Swal.fire('Incorrecto!','Datos No Registrados!','error');
+
+    if (this.dias.length == 0) {
+      Swal.fire('Incorrecto!', 'Favor seleccionar dias!', 'error');
+    } else {
+      if (this.seleccionados.length == 0) {
+        Swal.fire('Incorrecto!', 'Favor seleccionar trabajadores!', 'error');
+      } else {
+        if (this.id_horario == null) {
+          Swal.fire('Incorrecto!', 'Favor seleccionar horario!', 'error');
+        } else {
+          this.trabajador_horario = new Trabajador_Horario(this.id_horario, this.seleccionados, this.dias);
+          this._trabajador_horarioService.guardarTrabajadorHorario(this.trabajador_horario).subscribe(
+            response => {
+              if (response) {
+                Swal.fire('Correcto!', 'Datos Registrados Correctamente', 'success');
+              } else {
+                Swal.fire('Incorrecto!', 'Datos No Registrados!', 'error');
+              }
+            }
+          )
         }
       }
-    )
+    }
   }
 
   detalleHorario(detalle) {
