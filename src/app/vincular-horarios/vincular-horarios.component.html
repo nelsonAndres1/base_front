@@ -49,6 +49,28 @@
                                     </div>
                                     <div class="col-sm-3 pb-3">
                                         <label for="exampleAccount"><b>Horarios</b></label>
+                                        <input type="text" class="form-control" id="exampleAccount"
+                                            placeholder="Buscar Horario..." name="vacio_horario"
+                                            [(ngModel)]="vacio_horario" (input)="getHorarios($event)" required>
+                                        <div class="col-sm-12">
+                                            <div class="card card-body mb-1" *ngFor="let result of data_horarios"
+                                                (click)="getHorarioSeleccionado(result)" style="cursor: pointer;">
+                                                <div class="row mt-12">
+                                                    <div class="col-sm-6 pb-3">
+                                                        <h4>Detalle: {{result.detalle}}</h4>
+                                                    </div>
+                                                    <div class="col-sm-6 pb-3">
+                                                        <h5><b>Ingreso AM:</b> {{result.horingam}}  <b>Salida AM</b>
+                                                            {{result.horsalam}} <b>Ingreso PM</b> {{result.horingpm}}
+                                                             <b>Salida PM</b> {{result.horisalam}}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--                                     <div class="col-sm-3 pb-3">
+                                        <label for="exampleAccount"><b>Horarios</b></label>
                                         <select class="form-control" name="estado" (change)="detalleHorario($event)"
                                             required>
                                             <option value="" selected>SELECCIONE</option>
@@ -92,47 +114,54 @@
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-sm-3 pb-3">
                                         <label for=""><b>Vincular Dia</b></label>
-                                        <div class="form-check" >
-                                            <input class="form-check-input" (change)="agregarDias(1)" type="checkbox" id="flexCheckDefault" value=1>
+                                        <div class="form-check">
+                                            <input class="form-check-input" (change)="agregarDias(1)" type="checkbox"
+                                                id="flexCheckDefault" value=1>
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 LUNES
                                             </label>
                                         </div>
-                                        <div class="form-check" >
-                                            <input class="form-check-input" (change)="agregarDias(2)" type="checkbox" id="flexCheckDefault" value=2>
+                                        <div class="form-check">
+                                            <input class="form-check-input" (change)="agregarDias(2)" type="checkbox"
+                                                id="flexCheckDefault" value=2>
                                             <label class="form-check-label" for="flexCheckDefault">
-                                               MARTES
+                                                MARTES
                                             </label>
                                         </div>
-                                        <div class="form-check" >
-                                            <input class="form-check-input" (change)="agregarDias(3)" type="checkbox" id="flexCheckDefault" value=3>
+                                        <div class="form-check">
+                                            <input class="form-check-input" (change)="agregarDias(3)" type="checkbox"
+                                                id="flexCheckDefault" value=3>
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 MIERCOLES
                                             </label>
                                         </div>
-                                        <div class="form-check" >
-                                            <input class="form-check-input" (change)="agregarDias(4)" type="checkbox" id="flexCheckDefault" value=4>
+                                        <div class="form-check">
+                                            <input class="form-check-input" (change)="agregarDias(4)" type="checkbox"
+                                                id="flexCheckDefault" value=4>
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 JUEVES
                                             </label>
                                         </div>
-                                        <div class="form-check" >
-                                            <input class="form-check-input" (change)="agregarDias(5)"  type="checkbox" id="flexCheckDefault" value=5>
+                                        <div class="form-check">
+                                            <input class="form-check-input" (change)="agregarDias(5)" type="checkbox"
+                                                id="flexCheckDefault" value=5>
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 VIERNES
                                             </label>
                                         </div>
-                                        <div class="form-check" >
-                                            <input class="form-check-input" (change)="agregarDias(6)"  type="checkbox" id="flexCheckDefault" value=6>
+                                        <div class="form-check">
+                                            <input class="form-check-input" (change)="agregarDias(6)" type="checkbox"
+                                                id="flexCheckDefault" value=6>
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 SABADO
                                             </label>
                                         </div>
-                                        <div class="form-check" >
-                                            <input class="form-check-input" (change)="agregarDias(7)"  type="checkbox" id="flexCheckDefault" value=7>
+                                        <div class="form-check">
+                                            <input class="form-check-input" (change)="agregarDias(7)" type="checkbox"
+                                                id="flexCheckDefault" value=7>
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 DOMINGO
                                             </label>

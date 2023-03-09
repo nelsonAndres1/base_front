@@ -18,6 +18,7 @@ export class VincularHorariosComponent implements OnInit {
   nomin02: Nomin02;
   public vacio: any = null;
   public data: any = [];
+  public vacio_horario: any = [];
   public coddep: any;
   public trabajadores: any = [];
   public bandera: any = '';
@@ -27,6 +28,7 @@ export class VincularHorariosComponent implements OnInit {
   public trabajador_horario: Trabajador_Horario;
   public id_horario;
   public dias: any = [];
+  public data_horarios: any = [];
   constructor(private _conta28Service: Conta28Service, private _nomin02Service: Nomin02Service, private _horariosService: HorariosService, private _trabajador_horarioService: Trabajador_HorarioService) {
     this.nomin02 = new Nomin02('', '', '', '', '', '', '', 0);
 
@@ -61,6 +63,28 @@ export class VincularHorariosComponent implements OnInit {
     console.log("diasss!");
     console.log(this.dias);
 
+  }
+
+  getHorarios(pclave: any){
+    const keyword = pclave.target.value;
+    this._horariosService.searchHorario(keyword).then(
+      response => {
+        this.data_horarios = response;
+      }
+    )
+  }
+
+  getHorarioSeleccionado(result){
+    console.log("pruebaaaaa!");
+    console.log(result);
+    this.id_horario = result;
+    for (let index = 0; index < this.horarios.length; index++) {
+      if (this.horarios[index].id == result) {
+        this.horariosSeleccionado = this.horarios[index];
+      }
+    }
+
+    
   }
 
   registerVincularHorarios(form) {

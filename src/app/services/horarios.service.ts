@@ -21,6 +21,20 @@ export class HorariosService{
         return this._http.post(this.url+'tipo_horarios/TipoHorario',params,{headers:headers});
     }
 
+
+    searchHorario(pclave: any){
+        const response = new Promise(
+            resolve => {
+                this._http.get(global.url + `horario/searchHorario?search=${pclave}`).subscribe(data => {
+                    resolve(data);
+                }, err => {
+                    console.log(err);
+                });
+            });
+        return response;
+
+    }
+
     getHorarios(user:any): Observable<any>{
         let json = JSON.stringify(user);
         let params = 'json='+json;
