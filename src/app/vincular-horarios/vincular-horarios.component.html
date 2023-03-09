@@ -47,7 +47,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3 pb-3">
+                                    <!--  <div class="col-sm-3 pb-3">
                                         <label for="exampleAccount"><b>Horarios</b></label>
                                         <input type="text" class="form-control" id="exampleAccount"
                                             placeholder="Buscar Horario..." name="vacio_horario"
@@ -61,17 +61,17 @@
                                                     </div>
                                                     <div class="col-sm-6 pb-3">
                                                         <h5><b>Ingreso AM:</b> {{result.horingam}}  <b>Salida AM</b>
-                                                            {{result.horsalam}} <b>Ingreso PM</b> {{result.horingpm}}
+                                                            {{result.horsalam}}  <b>Ingreso PM</b> {{result.horingpm}}
                                                              <b>Salida PM</b> {{result.horisalam}}</h5>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <!--                                     <div class="col-sm-3 pb-3">
+                                    </div> -->
+                                    <div class="col-sm-3 pb-3">
                                         <label for="exampleAccount"><b>Horarios</b></label>
-                                        <select class="form-control" name="estado" (change)="detalleHorario($event)"
+                                        <select class="form-control selectpicker" name="estado" (change)="detalleHorario($event)"
                                             required>
                                             <option value="" selected>SELECCIONE</option>
                                             <option *ngFor="let dt of horarios" value={{dt.id}}>
@@ -88,12 +88,12 @@
                                                 {{dt.horsalpm}}
                                             </option>
                                         </select>
-                                        
+
                                         <br>
-                                        
+
                                         <label for="">Detalle Horario</label>
                                         <div class="col-md-12 offset-md">
-                                        
+
                                             <div class="col-sm-6 pb-3">
 
                                                 <h4>
@@ -103,18 +103,18 @@
                                                     <b> Hora Salida AM</b> {{horariosSeleccionado.horsalam}}
                                                 </h4>
                                             </div>
-                                            
+
                                             <div class="col-sm-6 pb-3">
                                                 <h4>
                                                     <b> Hora Ingreso PM</b> {{horariosSeleccionado.horingpm}}
                                                 </h4>
                                                 <h4>
                                                     <b> Hora Salida PM</b> {{horariosSeleccionado.horsalpm}}
-                                                </h4>                                                
+                                                </h4>
                                             </div>
 
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <div class="col-sm-3 pb-3">
                                         <label for=""><b>Vincular Dia</b></label>
                                         <div class="form-check">
