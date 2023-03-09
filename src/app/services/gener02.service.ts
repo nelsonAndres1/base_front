@@ -60,5 +60,18 @@ export class Gener02Service{
         return this.token;
     }
 
+
+    searchGener02(pclave: any){
+        const response = new Promise(
+            resolve => {
+                this._http.get(global.url + `gener02/searchGener02?search=${pclave}`).subscribe(data => {
+                    resolve(data);
+                }, err => {
+                    console.log(err);
+                });
+            });
+        return response;
+
+    }
     
 }

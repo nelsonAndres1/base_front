@@ -39,11 +39,15 @@ export class VincularHorariosComponent implements OnInit {
         this.horarios = response;
       }
     )
+
+   
     /*     this.dias = [{'1':'LUNES','2':'MARTES', '3':'MIERCOLES', '4':'JUEVES', '5':'VIERNES', '6':'SABADO', '7':'DOMINGO'}]; */
   }
 
   ngOnInit(): void {
   }
+
+
 
   agregarDias(dia) {
     let bandera = false;
@@ -65,7 +69,7 @@ export class VincularHorariosComponent implements OnInit {
 
   }
 
-  getHorarios(pclave: any){
+  getHorarios(pclave: any) {
     const keyword = pclave.target.value;
     this._horariosService.searchHorario(keyword).then(
       response => {
@@ -74,7 +78,7 @@ export class VincularHorariosComponent implements OnInit {
     )
   }
 
-  getHorarioSeleccionado(result){
+  getHorarioSeleccionado(result) {
     console.log("pruebaaaaa!");
     console.log(result);
     this.id_horario = result;
@@ -84,7 +88,7 @@ export class VincularHorariosComponent implements OnInit {
       }
     }
 
-    
+
   }
 
   registerVincularHorarios(form) {
