@@ -34,12 +34,23 @@
                 </div>
             </a>
         </div>
-        <div class="card">
-            <div class="reloj">
-                <p class="hora">{{hora | date:'hh:mm:ss:a'}}</p>
-                <p class="fecha">{{fecha | date}}</p>
+
+        <a>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="wrap">
+                        <div class="widget">
+                            <div class="fecha">
+                                <p class="hora">{{hora | date:'hh:mm:ss:a'}}</p>
+                                <p class="fecha">{{fecha | date}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </a>
+
 
 
         <button class="btn btn-danger navbar-btn" (click)="salir()">Salir</button>
