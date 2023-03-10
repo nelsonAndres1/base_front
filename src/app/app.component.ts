@@ -35,9 +35,10 @@ export class AppComponent implements OnInit,
     bandera_registro: boolean;
     bandera_asignartipo_horario: boolean;
     bandera_asignartrabajador_horario: boolean;
-    
+    fecha: number = Date.now();
+    hora: any;
 
-    constructor(private _registerService: RegisterService,private route: ActivatedRoute, public _gener02Service: Gener02Service, private router: Router) {
+    constructor(private _registerService: RegisterService, private route: ActivatedRoute, public _gener02Service: Gener02Service, private router: Router) {
         this.identity = this._gener02Service.getIdentity();
         this.token = this._gener02Service.getToken();
         this.bandera_registro = false;
@@ -47,24 +48,32 @@ export class AppComponent implements OnInit,
         console.log(this.identity);
     }
 
-    cerrarSesion(){
+    cerrarSesion() {
         var ratonParado;
         var milisegundosLimite = 2000;
-        $(document).on('mousemove', function() {
+        $(document).on('mousemove', function () {
             clearTimeout(ratonParado);
-         
-            ratonParado = setTimeout(function() {
-               // aqui lanzarias la ventana
-               console.log("si se activo!");
+
+            ratonParado = setTimeout(function () {
+                // aqui lanzarias la ventana
+                console.log("si se activo!");
             }, milisegundosLimite);
-         });
+        });
     }
 
-  
+    mostrarHora(){
+        this.hora = new Date();
+
+    }
+
 
     ngOnInit(): void {
-        console.log("Web cargada correctamente");
-    
+        this.mostrarHora();
+
+        setInterval(()=>{
+            this.hora = new Date();
+        },1000)
+
     }
 
     inp() {
