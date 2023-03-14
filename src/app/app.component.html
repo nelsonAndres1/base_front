@@ -18,14 +18,20 @@
                 <b>Control de Ingreso</b>
             </a>
             <!-- <a class="navbar-brand" routerLink=""><b></b></a> -->
-            <a class="navbar-brand" routerLink="home"><button type="button" class="btn btn-outline-info"><i
-                        class="icon-home"></i>Registro</button></a>
-            <a class="navbar-brand" routerLink="horarios"><button type="button" class="btn btn-outline-info"><i
-                        class="icon-home"></i>Horarios</button></a>
-            <a class="navbar-brand" routerLink="vincular_horarios"><button type="button" class="btn btn-outline-info"><i
-                        class="icon-home"></i>Vincular Horarios</button></a>
-            <a class="navbar-brand" routerLink="permisos_ingreso"><button type="button" class="btn btn-outline-info"><i
-                        class="icon-home"></i>Asignación de Permisos</button></a>
+            <a *ngIf="permisos21 != []">
+                <a class="navbar-brand" routerLink="home" *ngIf="permisos21.includes('RE')"><button type="button"
+                        class="btn btn-outline-info"><i class="icon-home"></i>Registro</button></a>
+                <a class="navbar-brand" routerLink="horarios" *ngIf="permisos21.includes('AH')"><button type="button"
+                        class="btn btn-outline-info"><i class="icon-home"></i>Horarios</button></a>
+                <a class="navbar-brand" routerLink="vincular_horarios" *ngIf="permisos21.includes('HT')"><button
+                        type="button" class="btn btn-outline-info"><i class="icon-home"></i>Vincular
+                        Horarios</button></a>
+                <a class="navbar-brand" routerLink="permisos_ingreso" *ngIf="permisos21.includes('AD')"><button
+                        type="button" class="btn btn-outline-info"><i class="icon-home"></i>Asignación de
+                        Permisos</button></a>
+                <a class="navbar-brand"> <button class="btn btn-danger navbar-btn" (click)="salir()">Salir</button></a>
+            </a>
+
             <a>
                 <div class="card">
                     <div class="card-body">
@@ -35,8 +41,7 @@
             </a>
         </div>
 
-        <a>
-
+        <a style="float: right; text-align:center; ">
             <div class="card">
                 <div class="card-body">
                     <div class="wrap">
@@ -53,7 +58,7 @@
 
 
 
-        <button class="btn btn-danger navbar-btn" (click)="salir()">Salir</button>
+
     </div>
 </nav>
 <br>

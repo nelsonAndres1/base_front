@@ -12,7 +12,7 @@
                             <div class="card-header">
                                 <h3 class="mb-0">Ingrese la información requerida</h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" *ngIf="permisos21.includes('AH')">
                                 <div class="row mt-12">
                                     <div class="col-sm-6 pb-3">
                                         <label for="exampleAccount"><b>Horario Ingreso Mañana</b></label>

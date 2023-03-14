@@ -8,12 +8,13 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { identity } from 'rxjs';
 import { RegisterService } from './services/register.service';
+import { PermisosService } from './services/permisos.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [Gener02Service, RegisterService]
+    providers: [Gener02Service, RegisterService, PermisosService]
 })
 
 export class AppComponent implements OnInit,
@@ -37,8 +38,11 @@ export class AppComponent implements OnInit,
     bandera_asignartrabajador_horario: boolean;
     fecha: number = Date.now();
     hora: any;
+    gener02: Gener02;
+    permisos21: any = [];
+    band1: number = 0;
 
-    constructor(private _registerService: RegisterService, private route: ActivatedRoute, public _gener02Service: Gener02Service, private router: Router) {
+    constructor(private _registerService: RegisterService, private route: ActivatedRoute, public _gener02Service: Gener02Service, private router: Router, private _permisoService: PermisosService) {
         this.identity = this._gener02Service.getIdentity();
         this.token = this._gener02Service.getToken();
         this.bandera_registro = false;
@@ -46,6 +50,24 @@ export class AppComponent implements OnInit,
         this.bandera_asignartrabajador_horario = false;
         console.log("Datos!!");
         console.log(this.identity);
+        this.gener02 = new Gener02('', '', '');
+        if (this.identity == undefined) {
+            
+
+        } else {
+            this.gener02 = new Gener02(this.identity.sub, '', '');
+
+            this._permisoService.getPermisos(this.gener02).subscribe(
+                response => {
+                    console.log("response!");
+                    console.log(response);
+                    for (let index = 0; index < response.length; index++) {
+                        console.log(response[index].permiso);
+                        this.permisos21.push(response[index].permiso);
+                    }
+                }
+            )
+        }
     }
 
     cerrarSesion() {
@@ -61,7 +83,7 @@ export class AppComponent implements OnInit,
         });
     }
 
-    mostrarHora(){
+    mostrarHora() {
         this.hora = new Date();
 
     }
@@ -70,9 +92,9 @@ export class AppComponent implements OnInit,
     ngOnInit(): void {
         this.mostrarHora();
 
-        setInterval(()=>{
+        setInterval(() => {
             this.hora = new Date();
-        },1000)
+        }, 1000)
 
     }
 
@@ -82,38 +104,39 @@ export class AppComponent implements OnInit,
 
     salir() {
 
-        Swal.fire({
-            icon: 'warning',
-            title: 'Salida',
-            text: '¿Estas seguro de salir?',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si!'
-        }).then((result) => {
-            if (result.isConfirmed) {
+        /*  Swal.fire({
+             icon: 'warning',
+             title: 'Salida',
+             text: '¿Estas seguro de salir?',
+             showCancelButton: true,
+             confirmButtonColor: '#3085d6',
+             cancelButtonColor: '#d33',
+             confirmButtonText: 'Si!'
+         }).then((result) => { */
+        /*             if (result.isConfirmed) { */
 
-                localStorage.removeItem('identity');
-                localStorage.removeItem('token');
-                localStorage.removeItem('tpago');
-                localStorage.removeItem('token1');
-                localStorage.removeItem('tpa');
-                localStorage.removeItem('identity2');
-                localStorage.removeItem('identity1');
-                localStorage.removeItem('permisos');
-                localStorage.removeItem('tokenConsultado');
-                localStorage.removeItem('tokenConsultado2');
-                localStorage.removeItem('numero');
+        localStorage.removeItem('identity');
+        localStorage.removeItem('token');
+        localStorage.removeItem('tpago');
+        localStorage.removeItem('token1');
+        localStorage.removeItem('tpa');
+        localStorage.removeItem('identity2');
+        localStorage.removeItem('identity1');
+        localStorage.removeItem('permisos');
+        localStorage.removeItem('tokenConsultado');
+        localStorage.removeItem('tokenConsultado2');
+        localStorage.removeItem('numero');
 
-                this.identity = null;
-                this.token = null;
-                if (this.identity == null) {
+        this.permisos21 = [];
+        this.identity = null;
+        this.token = null;
+        if (this.identity == null) {
 
-                    console.log(this.identity);
-                    this.router.navigate(['login']);
-                }
-            }
-        });
+            console.log(this.identity);
+            this.router.navigate(['login']);
+        }
+        /*    }
+       }); */
 
 
 

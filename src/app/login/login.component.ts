@@ -65,17 +65,15 @@ export class LoginComponent implements OnInit {
                 confirmButtonText: 'Ok!'
               }).then((result) => {
                 if (result.isConfirmed) {
-
                   this.identity = response;
-
                   this.token
                   this.identity;
-
                   localStorage.setItem('token', this.token);
                   localStorage.setItem('identity', JSON.stringify(this.identity));
-
-
                   this._router.navigate(['home']);
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 500);
                 }
               });
             },
