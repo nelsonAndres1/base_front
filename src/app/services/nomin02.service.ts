@@ -61,6 +61,12 @@ export class Nomin02Service{
         let headers = new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded');
         return this._http.post(this.url+'nomin02/traerUltimo',params,{headers:headers});
     }
+    getDataNomin02(user:any): Observable<any>{
+        let json = JSON.stringify(user);
+        let params = 'json='+json;
+        let headers = new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded');
+        return this._http.post(this.url+'nomin02/getDataNomin02',params,{headers:headers});
+    }
 
     
 }

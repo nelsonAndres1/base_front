@@ -29,6 +29,8 @@
                 <a class="navbar-brand" routerLink="permisos_ingreso" *ngIf="permisos21.includes('AD')"><button
                         type="button" class="btn btn-outline-info"><i class="icon-home"></i>Asignación de
                         Permisos</button></a>
+                <a class="navbar-brand" routerLink="reportes" *ngIf="permisos21.includes('RG')"><button type="button"
+                        class="btn btn-outline-info"><i class="icon-home"></i>Reportes</button></a>
                 <a class="navbar-brand"> <button class="btn btn-danger navbar-btn" (click)="salir()">Salir</button></a>
             </a>
 
