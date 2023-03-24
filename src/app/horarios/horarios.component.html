@@ -15,6 +15,31 @@
                             <div class="card-body" *ngIf="permisos21.includes('AH')">
                                 <div class="row mt-12">
                                     <div class="col-sm-6 pb-3">
+                                        <label for="exampleAccount"><b>Tipo Horario</b></label>
+                                        <select class="form-control" name="id_tipo" #id_tipo="ngModel"
+                                            [(ngModel)]="horario.id_tipo" (change)="tipo_de_horario($event)" required>
+                                            <option value="" selected>SELECCIONE</option>
+                                            <option *ngFor="let dt of tipo_horario" value={{dt.id}}>{{dt.detalle}}
+                                            </option>
+                                        </select>
+                                        <small *ngIf="!id_tipo.valid && id_tipo.touched"
+                                            class="invalid-feedback d-block">
+                                            El campo no es valido!
+                                        </small>
+                                    </div>
+                                    <div class="col-sm-6 pb-3">
+                                        <label for="exampleAccount"><b>Detalle</b></label>
+                                        <input class="form-control" id="exampleAccount" placeholder="Detalle"
+                                            name="detalle" #detalle="ngModel" [(ngModel)]="horario.detalle" type="text"
+                                            id="documento" required>
+                                        <small *ngIf="!detalle.valid && detalle.touched"
+                                            class="invalid-feedback d-block">
+                                            El campo no es valido!
+                                        </small>
+                                    </div>
+                                </div>
+                                <div *ngIf="banderaGeneral" class="row mt-12">
+                                    <div class="col-sm-6 pb-3">
                                         <label for="exampleAccount"><b>Horario Ingreso Mañana</b></label>
                                         <input type="time" class="form-control" id="exampleAccount"
                                             placeholder="Horario Ingreso Mañana" name="horingam" #horingam="ngModel"
@@ -28,7 +53,8 @@
                                         <label for="exampleAccount"><b>Horario Salida Mañana</b></label>
                                         <input class="form-control" id="exampleAccount"
                                             placeholder="Horario Salida Mañana" name="horsalam" #horsalam="ngModel"
-                                            [(ngModel)]="horario.horsalam" type="time" id="documento">
+                                            [(ngModel)]="horario.horsalam" type="time" id="documento"
+                                            disabled={{bandera}}>
                                         <small *ngIf="!horsalam.valid && horsalam.touched"
                                             class="invalid-feedback d-block">
                                             El campo no es valido!
@@ -38,7 +64,8 @@
                                         <label for="exampleAccount"><b>Horario Ingreso Tarde</b></label>
                                         <input class="form-control" id="exampleAccount"
                                             placeholder="Horario Ingreso Tarde" name="horingpm" #horingpm="ngModel"
-                                            [(ngModel)]="horario.horingpm" type="time" id="documento">
+                                            [(ngModel)]="horario.horingpm" type="time" id="documento"
+                                            disabled={{bandera}}>
 
                                         <small *ngIf="!horingpm.valid && horingpm.touched"
                                             class="invalid-feedback d-block">
@@ -55,7 +82,6 @@
                                             El campo no es valido!
                                         </small>
                                     </div>
-
                                     <div class="col-sm-6 pb-3">
                                         <label for="exampleAccount"><b>Estado</b></label>
                                         <select class="form-control" name="estado" #estado="ngModel"
@@ -68,30 +94,11 @@
                                             El campo no es valido!
                                         </small>
                                     </div>
-                                    <div class="col-sm-6 pb-3">
-                                        <label for="exampleAccount"><b>Detalle</b></label>
-                                        <input class="form-control" id="exampleAccount" placeholder="Detalle"
-                                            name="detalle" #detalle="ngModel" [(ngModel)]="horario.detalle" type="text"
-                                            id="documento" required>
-                                        <small *ngIf="!detalle.valid && detalle.touched"
-                                            class="invalid-feedback d-block">
-                                            El campo no es valido!
-                                        </small>
-                                    </div>
-                                    <div class="col-sm-6 pb-3">
-                                        <label for="exampleAccount"><b>Tipo Horario</b></label>
-                                        <select class="form-control" name="id_tipo" #id_tipo="ngModel"
-                                            [(ngModel)]="horario.id_tipo" required>
-                                            <option value="" selected>SELECCIONE</option>
-                                            <option *ngFor="let dt of tipo_horario" value={{dt.id}}>{{dt.detalle}}
-                                            </option>
-                                        </select>
-                                        <small *ngIf="!id_tipo.valid && id_tipo.touched"
-                                            class="invalid-feedback d-block">
-                                            El campo no es valido!
-                                        </small>
-                                    </div>
+
+
                                 </div>
+
+
                             </div>
                             <div class="card-footer">
                                 <div class="row mt-4">

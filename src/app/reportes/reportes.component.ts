@@ -28,7 +28,7 @@ export class ReportesComponent implements OnInit {
   coddep: any;
   nomin02: Nomin02;
   vacio: any;
-  constructor(private _reporteService: ReporteService,private _permisoService: PermisosService, private _conta28Service: Conta28Service, private _gener02Service: Gener02Service, private _nomin02Service: Nomin02Service) {
+  constructor(private _reporteService: ReporteService, private _permisoService: PermisosService, private _conta28Service: Conta28Service, private _gener02Service: Gener02Service, private _nomin02Service: Nomin02Service) {
     this.gener02 = new Gener02('', '', '');
     this.identity = this._gener02Service.getIdentity();
     this.reporte = new Reporte('', '', '', '');
@@ -57,28 +57,29 @@ export class ReportesComponent implements OnInit {
   ngOnInit(): void {
   }
   registerHorarios(form) {
-    
-    if(this.reporte.coddep == ''){
-      this.reporte.coddep ='-';
+
+    if (this.reporte.coddep == '') {
+      this.reporte.coddep = '-';
     }
-    if(this.reporte.docemp == ''){
-      this.reporte.docemp ='-';
+    if (this.reporte.docemp == '') {
+      this.reporte.docemp = '-';
     }
-    if(this.reporte.fecfin == ''){
-      this.reporte.fecfin ='-';
+    if (this.reporte.fecfin == '') {
+      this.reporte.fecfin = '-';
     }
-    if(this.reporte.fecini == ''){
-      this.reporte.fecini ='-';
+    if (this.reporte.fecini == '') {
+      this.reporte.fecini = '-';
     }
     console.log("form!");
     console.log(this.reporte);
     this._reporteService.getData(this.reporte).subscribe(
-      response=>{
+      response => {
         console.log("respuesta!!!");
         console.log(response);
+        this._reporteService.dowloadExcel(response);
       }
     )
-  
+
   }
   traerEmpleado(docemp: any) {
     this._nomin02Service.getDataNomin02(this.reporte).subscribe(
