@@ -24,40 +24,50 @@ export class HomeComponent implements OnInit, AfterContentInit {
   name: string = '';
   usuario: any;
   bandera = true;
-  ultimo: any =[];
-  gener02:Gener02;
-  permisos21:any = [];
+  ultimo: any = [];
+  gener02: Gener02;
+  permisos21: any = [];
+  usuario_vigilancia = [1695,
+    1733,
+    1735,
+    1737,
+    1738,
+    1740,
+    1743,
+    1815,
+    1818,
+    1833,
+    1834,
+    1835,
+    1836,
+    1837,
+    1838,
+    1839,
+    1840,
+    1851,
+    1750]
   constructor(
     private _registerService: RegisterService,
     private _gener02Service: Gener02Service,
     private _nomin02Service: Nomin02Service,
-    private host: ElementRef,
-    private _permisoService: PermisosService
   ) {
     this.identity = this._gener02Service.getIdentity();
     this.token = this._gener02Service.getToken();
     this.usuario = this.identity.sub;
     this.nomin02 = new Nomin02('', '', '', '', '', '', '', this.usuario);
-    this.gener02 = new Gener02('','','');
-
-    if(this.identity == undefined){
-
-    }else{
-        this.gener02 = new Gener02(this.identity.sub,'','');
-  
-        this._permisoService.getPermisos(this.gener02).subscribe(
-            response=>{
-                console.log("response!");
-                console.log(response);
-                for (let index = 0; index < response.length; index++) {
-                    console.log(response[index].permiso);
-                    this.permisos21.push(response[index].permiso);
-                }
-                console.log("permisos!");
-                console.log(this.permisos21);
-            }
-        )
+    this.gener02 = new Gener02('', '', '');
+    this.permisos21 = localStorage.getItem('permisos')?.split(',');
+    console.log(this.identity.sub);
+    if(this.usuario_vigilancia.includes(this.identity.sub)){
+      if(this.permisos21 == undefined){
+        this.permisos21 = [];
+      }
+      this.permisos21.push('RE');
+      console.log("AAA");
     }
+    console.log("permisos21");
+    console.log(this.permisos21);
+
 
     this.traerUltimo();
   }
@@ -71,14 +81,14 @@ export class HomeComponent implements OnInit, AfterContentInit {
 
   getNomin02(form, docemp) {
     this.nomin02.docemp = Number(this.nomin02.docemp);
-    if(!this.permisos21.includes('RE')){
+    if (!this.permisos21.includes('RE')) {
       Swal.fire({
         icon: 'error',
         title: 'No tiene Permisos para registro!',
         showConfirmButton: false,
         timer: 2000
       });
-    }else{
+    } else {
       if (this.nomin02.docemp != '') {
         this._registerService.validateNomin02(this.nomin02).subscribe(
           response => {
@@ -86,16 +96,16 @@ export class HomeComponent implements OnInit, AfterContentInit {
               this.respuesta = response;
               console.log("Ahhhhh!");
               console.log(this.respuesta);
-  
-              
-              if(this.respuesta.nombre == undefined){
+
+
+              if (this.respuesta.nombre == undefined) {
                 Swal.fire({
                   icon: 'error',
                   title: 'Usuario Incorrecto!  No asignado horario!',
                   showConfirmButton: false,
                   timer: 1300
                 });
-              }else{
+              } else {
                 Swal.fire({
                   icon: response.status,
                   title: 'Usuario Correcto!' + ' ' + this.respuesta.nombre,
@@ -119,9 +129,9 @@ export class HomeComponent implements OnInit, AfterContentInit {
           }
         );
       }
-        setTimeout(() => {
+      setTimeout(() => {
         window.location.reload();
-      }, 1000); 
+      }, 1000);
     }
   }
 
@@ -130,16 +140,16 @@ export class HomeComponent implements OnInit, AfterContentInit {
   }
 
 
-  traerUltimo(){
+  traerUltimo() {
     this._nomin02Service.traerUltimo(this.nomin02).subscribe(
-      response =>{
+      response => {
         this.ultimo = response;
       }
     )
   }
 
 
-  
+
 
 
 }

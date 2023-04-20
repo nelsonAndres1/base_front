@@ -179,13 +179,12 @@ export class VincularHorariosComponent implements OnInit {
       response => {
         if (response) {
           this.trabajadores = response;
+          this.data = [];
         } else {
           this.trabajadores = [];
         }
       }
     )
-
-
   }
 
   getConta28(pclave: any) {

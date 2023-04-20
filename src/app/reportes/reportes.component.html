@@ -49,6 +49,16 @@
                                             placeholder="Fecha Final" name="fecfin" #fecfin="ngModel"
                                             [(ngModel)]="reporte.fecfin" id="fecfin">
                                     </div>
+
+                                    <div class="col-sm-6 pb-3">
+                                        <label for="exampleAccount"><b>Tipo de Reporte</b></label>
+                                        <select class="form-select" aria-label="Default select example" (change)="tipo_repo($event)">
+                                            <option selected>Seleccione el Tipo de Reporte</option>
+                                            <option value="1">Reporte de Registro</option>
+                                            <option value="2">Reporte de No Registro</option>
+                                        </select>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="card-footer">

@@ -69,6 +69,7 @@ export class PermisosIngresoComponent implements OnInit {
     console.log(detalle);
     this.seleccionado = detalle;
     this.permisos_ingreso.usuario = detalle.usuario;
+    this.data = [];
   }
   enviar() {
     if (this.permisos_ingreso.usuario == '') {

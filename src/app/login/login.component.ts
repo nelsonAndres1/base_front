@@ -5,13 +5,14 @@ import { Nomin02 } from '../models/nomin02';
 import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 import Swal from 'sweetalert2';
 import { iif } from 'rxjs';
+import { PermisosService } from '../services/permisos.service';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [Gener02Service]
+  providers: [Gener02Service, PermisosService]
 })
 export class LoginComponent implements OnInit {
   public gener02: Gener02;
@@ -21,12 +22,13 @@ export class LoginComponent implements OnInit {
   public v: any = true;
   public arrayN: any = [];
   public bandera: any;
-
+  permisos21: any = [];
 
   constructor(
     private _gener02Service: Gener02Service,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _permisoService: PermisosService
   ) {
     this.gener02 = new Gener02('', '', '');
   }
@@ -37,8 +39,26 @@ export class LoginComponent implements OnInit {
     Swal.fire('¿Olvido la Contraseña?', 'Por favor comunicarse con la oficina de Sistemas e Informatica.', 'question');
   }
 
-  permisos($docemp) {
+  permisos(ident) {
 
+    if (ident == undefined) {
+
+    } else {
+      this.gener02 = new Gener02(ident, '', '');
+      this._permisoService.getPermisos(this.gener02).subscribe(
+        response => {
+          console.log("response!");
+          console.log(response);
+          for (let index = 0; index < response.length; index++) {
+            console.log(response[index].permiso);
+            this.permisos21.push(response[index].permiso);
+          }
+          localStorage.setItem('permisos', this.permisos21);
+          console.log("permisos!!!!!!");
+          console.log(this.permisos21);
+        }
+      )
+    }
 
   }
 
@@ -56,7 +76,7 @@ export class LoginComponent implements OnInit {
               console.log(response);
               Swal.fire({
                 title: '¡Bienvenido ' + response.name + ' !',
-                text: 'Control de Ingreso - Comfamiliar de Nariño '+response.sede,
+                text: 'Control de Ingreso - Comfamiliar de Nariño ' + response.sede,
                 imageUrl: './assets/logo2.png',
                 imageAlt: 'Custom image',
                 showCancelButton: true,
@@ -68,6 +88,7 @@ export class LoginComponent implements OnInit {
                   this.identity = response;
                   this.token
                   this.identity;
+                  this.permisos(this.identity.sub);
                   localStorage.setItem('token', this.token);
                   localStorage.setItem('identity', JSON.stringify(this.identity));
                   this._router.navigate(['home']);
@@ -125,7 +146,6 @@ export class LoginComponent implements OnInit {
               localStorage.removeItem('identity1');
               localStorage.removeItem('permisos');
               localStorage.removeItem('tokenConsultado3');
-
               this.identity = '';
               this.token = null;
               if (this.identity == '') {

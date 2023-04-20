@@ -28,6 +28,7 @@ export class ReportesComponent implements OnInit {
   coddep: any;
   nomin02: Nomin02;
   vacio: any;
+  tipo_rep:any = '';
   constructor(private _reporteService: ReporteService, private _permisoService: PermisosService, private _conta28Service: Conta28Service, private _gener02Service: Gener02Service, private _nomin02Service: Nomin02Service) {
     this.gener02 = new Gener02('', '', '');
     this.identity = this._gener02Service.getIdentity();
@@ -56,6 +57,11 @@ export class ReportesComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  
+  tipo_repo(event){
+    this.tipo_rep = event.target.value;
+  }
   registerHorarios(form) {
 
     if (this.reporte.coddep == '') {
@@ -72,15 +78,37 @@ export class ReportesComponent implements OnInit {
     }
     console.log("form!");
     console.log(this.reporte);
-    this._reporteService.getData(this.reporte).subscribe(
-      response => {
-        console.log("respuesta!!!");
-        console.log(response);
-        this._reporteService.dowloadExcel(response);
+
+
+    if(this.tipo_rep != ''){
+      if(this.tipo_rep=='1'){
+        this._reporteService.getData(this.reporte).subscribe(
+          response => {
+            console.log("respuesta!!!");
+            console.log(response);
+            this._reporteService.dowloadExcel(response);
+          }
+        )
+      }else{
+        this._reporteService.reportNoMarcados(this.reporte).subscribe(
+          response => {
+            console.log("respuestaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!");
+            console.log(response);
+            this._reporteService.dowloadExcel(response);
+          }
+        )
       }
-    )
+    }else{
+      Swal.fire('Error','No ha seleccionado el tipo de Reporte', 'error');
+    }
+
+
+
+
 
   }
+
+
   traerEmpleado(docemp: any) {
     this._nomin02Service.getDataNomin02(this.reporte).subscribe(
       response => {
