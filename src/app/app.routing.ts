@@ -9,6 +9,7 @@ import { HorariosComponent } from "./horarios/horarios.component";
 import { VincularHorariosComponent } from "./vincular-horarios/vincular-horarios.component";
 import { PermisosIngresoComponent } from "./permisos-ingreso/permisos-ingreso.component";
 import { ReportesComponent } from "./reportes/reportes.component";
+import { LoadingComponent } from "./loading/loading.component";
 
 const appRoutes: Routes = [
     {path: '', component: LoginComponent, canActivate:[LoginGuard]},
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
     {path: 'vincular_horarios', component: VincularHorariosComponent, canActivate: [IdentityGuard]},
     {path: 'permisos_ingreso', component: PermisosIngresoComponent, canActivate: [IdentityGuard]},
     {path: 'reportes', component: ReportesComponent, canActivate: [IdentityGuard]},
+    {path: 'loading', component: LoadingComponent},
     {path: '**', component: ErrorComponent}
 ];
 

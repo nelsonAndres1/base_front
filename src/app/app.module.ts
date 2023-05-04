@@ -32,6 +32,7 @@ import { VincularHorariosComponent } from './vincular-horarios/vincular-horarios
 import { AutoFocusDirectiveDirective } from './auto-focus-directive.directive';
 import { PermisosIngresoComponent } from './permisos-ingreso/permisos-ingreso.component';
 import { ReportesComponent } from './reportes/reportes.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
@@ -47,6 +48,7 @@ import { ReportesComponent } from './reportes/reportes.component';
     AutoFocusDirectiveDirective,
     PermisosIngresoComponent,
     ReportesComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
