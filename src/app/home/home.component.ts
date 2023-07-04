@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
   ultimo: any = [];
   gener02: Gener02;
   permisos21: any = [];
+  ip: any;
   usuario_vigilancia = [1695,
     1733,
     1735,
@@ -51,15 +52,25 @@ export class HomeComponent implements OnInit, AfterContentInit {
     private _gener02Service: Gener02Service,
     private _nomin02Service: Nomin02Service,
   ) {
+
+    const URL_API = "https://api.ipify.org/?format=json";
+    fetch(URL_API)
+      .then(respuestaRaw => respuestaRaw.json())
+      .then(respuesta => {
+        const ip = respuesta.ip;
+        localStorage.setItem('IP',ip);
+        this.ip = ip;
+      });
+    
     this.identity = this._gener02Service.getIdentity();
     this.token = this._gener02Service.getToken();
     this.usuario = this.identity.sub;
-    this.nomin02 = new Nomin02('', '', '', '', '', '', '', this.usuario);
+    this.nomin02 = new Nomin02('', '', '', '', '', '', '', this.usuario,'');
     this.gener02 = new Gener02('', '', '');
     this.permisos21 = localStorage.getItem('permisos')?.split(',');
     console.log(this.identity.sub);
-    if(this.usuario_vigilancia.includes(this.identity.sub)){
-      if(this.permisos21 == undefined){
+    if (this.usuario_vigilancia.includes(this.identity.sub)) {
+      if (this.permisos21 == undefined) {
         this.permisos21 = [];
       }
       this.permisos21.push('RE');
@@ -80,6 +91,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
   }
 
   getNomin02(form, docemp) {
+    this.nomin02.ip = this.ip;
     this.nomin02.docemp = Number(this.nomin02.docemp);
     if (!this.permisos21.includes('RE')) {
       Swal.fire({

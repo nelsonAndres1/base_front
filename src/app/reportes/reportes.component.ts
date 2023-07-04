@@ -34,7 +34,7 @@ export class ReportesComponent implements OnInit {
     this.gener02 = new Gener02('', '', '');
     this.identity = this._gener02Service.getIdentity();
     this.reporte = new Reporte('', '', '', '');
-    this.nomin02 = new Nomin02('', '', '', '', '', '', '', 0);
+    this.nomin02 = new Nomin02('', '', '', '', '', '', '', 0,'');
     if (this.identity == undefined) {
 
     } else {

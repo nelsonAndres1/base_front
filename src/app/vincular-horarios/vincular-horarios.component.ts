@@ -30,7 +30,7 @@ export class VincularHorariosComponent implements OnInit {
   public dias: any = [];
   public data_horarios: any = [];
   constructor(private _conta28Service: Conta28Service, private _nomin02Service: Nomin02Service, private _horariosService: HorariosService, private _trabajador_horarioService: Trabajador_HorarioService) {
-    this.nomin02 = new Nomin02('', '', '', '', '', '', '', 0);
+    this.nomin02 = new Nomin02('', '', '', '', '', '', '', 0,'');
 
     this.trabajador_horario = new Trabajador_Horario('', []);
 
