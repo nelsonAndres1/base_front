@@ -8,11 +8,14 @@ import { Gener02Service } from '../services/gener02.service';
 import { Nomin02Service } from '../services/nomin02.service';
 import { Gener02 } from '../models/gener02';
 import { PermisosService } from '../services/permisos.service';
+import { IpService } from '../services/ip.service';
+import { global } from '../services/global';
+import axios from 'axios';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [RegisterService, Gener02Service, Nomin02Service, PermisosService]
+  providers: [RegisterService, Gener02Service, Nomin02Service, PermisosService, IpService]
 })
 export class HomeComponent implements OnInit, AfterContentInit {
   @ViewChild("docemp") input: ElementRef | undefined;
@@ -47,43 +50,54 @@ export class HomeComponent implements OnInit, AfterContentInit {
     1840,
     1851,
     1750]
+  ipAddress: string;
+  realIpAddress: any;
   constructor(
     private _registerService: RegisterService,
     private _gener02Service: Gener02Service,
     private _nomin02Service: Nomin02Service,
+    private ipService: IpService
   ) {
+
+    this.ipAddress = '';
+    this.ipService.getIpAddress().then(ip => {
+      this.sendRealIpToBackend(ip);
+    });
 
     const URL_API = "https://api.ipify.org/?format=json";
     fetch(URL_API)
       .then(respuestaRaw => respuestaRaw.json())
       .then(respuesta => {
         const ip = respuesta.ip;
-        localStorage.setItem('IP',ip);
-        this.ip = ip;
+        localStorage.setItem('IP', ip);
       });
-    
+
     this.identity = this._gener02Service.getIdentity();
     this.token = this._gener02Service.getToken();
     this.usuario = this.identity.sub;
-    this.nomin02 = new Nomin02('', '', '', '', '', '', '', this.usuario,'');
+    this.nomin02 = new Nomin02('', '', '', '', '', '', '', this.usuario, '');
     this.gener02 = new Gener02('', '', '');
     this.permisos21 = localStorage.getItem('permisos')?.split(',');
-    console.log(this.identity.sub);
     if (this.usuario_vigilancia.includes(this.identity.sub)) {
       if (this.permisos21 == undefined) {
         this.permisos21 = [];
       }
       this.permisos21.push('RE');
-      console.log("AAA");
     }
-    console.log("permisos21");
-    console.log(this.permisos21);
-
-
     this.traerUltimo();
   }
   ngAfterContentInit(): void {
-
+  }
+  sendRealIpToBackend(ip: string): void {
+    axios.post(global.url + 'registro/real-ip', { ip })
+      .then(response => {
+        this.realIpAddress = response.data.realIp;
+        this.ip = this.realIpAddress
+      })
+      .catch(error => {
+        console.error('Error sending real IP to backend:', error.response.data);
+        this.realIpAddress = null;
+      });
   }
 
   ngOnInit(): void {
@@ -91,7 +105,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
   }
 
   getNomin02(form, docemp) {
-    this.nomin02.ip = this.ip;
+    this.nomin02.ip = this.realIpAddress;
     this.nomin02.docemp = Number(this.nomin02.docemp);
     if (!this.permisos21.includes('RE')) {
       Swal.fire({
