@@ -144,7 +144,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
             } else {
               this.respuesta = response;
               Swal.fire({
-                icon: response.status,
+                icon: response.status2,
                 title: 'Usuario Incorrecto! ' + ' ' + this.respuesta.nombre + ' ' + response.message,
                 showConfirmButton: false,
                 timer: 1300
