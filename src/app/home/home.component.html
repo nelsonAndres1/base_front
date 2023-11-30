@@ -2,20 +2,17 @@
 <div class="container py-1">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="text-center mb-3">Control de Ingreso</h2>
+            <h1 class="text-center mb-3"><b>Control de Ingreso</b></h1>
             <hr class="mb-4">
             <div class="row justify-content-center">
                 <form #registerForm="ngForm" (ngSubmit)="getNomin02(registerForm,'')">
-                    <div class="col-md-10 offset-md-1">
+                    <div class="col-md-12">
                         <span class="anchor" id="formComplex"></span>
                         <div class="card card-outline-secondary">
-                            <div class="card-header">
-                                <h3 class="mb-0">Ingrese la información requerida</h3>
-                            </div>
                             <div class="card-body">
                                 <div class="row mt-12">
-                                    <div class="col-sm-6 pb-3" style="align-content: center;">
-                                        <label for="exampleAccount"><b><h2>Cedula</h2></b></label>
+                                    <div class="col-sm-5 pb-3" style="align-content: center;">
+                                        <label for="exampleAccount"><b><h2>Documento</h2></b></label>
                                         <input class="form-control" id="exampleAccount" placeholder="Documento..."
                                             #docemp="ngModel" [(ngModel)]="nomin02.docemp" name="docemp"
                                             appAutoFocusDirective type="text" id="documento"
@@ -28,15 +25,15 @@
                                         <input type="text" name="" id="" class="sin_fondo">
                                         <input type="text" name="" id="" class="sin_fondo">
                                     </div>
-                                    <div class="card card-outline-secondary col-sm-6 pb-3">
+                                    <div class="card card-outline-secondary col-sm-7 pb-3">
                                         <div class="card-header">
-                                            <h1 class="mb-0">Importante: </h1> <h3>¡En la parte inferior verficar su registro!</h3> 
+                                            <h2 class="mb-0"><b>Importante:</b> </h2> <h3>¡En la parte inferior verficar su registro!</h3> 
                                         </div>
-                                        <div class="card-body" style="background-color: #b8d6e2;">
-                                            <h2>Ultimo Registro</h2>
-                                            <h3><b>Nombre: </b> {{ultimo.nombre}}</h3>
-                                            <h3><b>Cedula: </b> {{ultimo.docemp}}</h3>
-                                            <h3><b>Tipo: </b> {{ultimo.tipo_ingreso}}</h3>
+                                        <div class="card-body" style="background-color: #d5e1e6;">
+                                            <h1><b>Ultimo Registro</b></h1>
+                                            <h2><b>Nombre: </b> {{ultimo.nombre}}</h2>
+                                            <h2><b>Cedula: </b> {{ultimo.docemp}}</h2>
+                                            <h2><b>Tipo: </b> {{ultimo.tipo_ingreso}}</h2>
                                         </div>
 
                                     </div>
